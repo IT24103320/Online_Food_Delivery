@@ -1,0 +1,8 @@
+aathif,aathifraa@gmail.com,0769211611,225,colombo -06,dadadadad,1234
+Rifas A Azeez Aathif,aathifraa@gmail.com,0769211611,226A/1,Jinnah Road,Ampara,Ampara,123
+Rifas A Azeez Aathif,aathifraa@gmail.com,0769211611,123
+Rifas A Azeez Aathif,aathifraa@gmail.com,0769211611,123,user
+Shiham,shiham@gmail.com,102938454,2345,colombo,add,user
+
+Rifas A Azeez Aathif,aathifraa@gmail.com,0769211611,123,225,colombo -06,sssss,user
+inzam,innia@gmail.com,9845023059,456,colombo9,colobo,user
