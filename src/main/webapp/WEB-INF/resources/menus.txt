@@ -1,0 +1,2 @@
+1,Margherita Pizza,1,12.99,Classic tomato and mozzarella,images/pizza.jpg
+2,Cheeseburger,2,8.99,Juicy beef patty with cheese,images/burger.jpg
