@@ -41,6 +41,7 @@ public class adminuser extends HttpServlet {
         ArrayList<customer> user = service.getAllUser();
         request.setAttribute("allUser", user);
 
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
         dispatcher.forward(request, response);
     }

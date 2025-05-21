@@ -30,7 +30,8 @@ public class delete extends HttpServlet {
             request.setAttribute("allUser", user);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else {
-            response.sendRedirect("profile.jsp"); // Redirect to profile if email not found in session
+            response.sendRedirect("profile.jsp");
+            // Redirect to profile if email not found in session
         }
     }
 }

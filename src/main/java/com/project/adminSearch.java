@@ -42,6 +42,7 @@ public class  adminSearch extends HttpServlet {
         request.setAttribute("matchedUsers", matchedUsers);
 
         // Forward to admin dashboard to display the results
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("adminDashboard.jsp");
         dispatcher.forward(request, response);
     }
