@@ -16,7 +16,6 @@
     <div class="container mx-auto px-4 flex justify-between items-center">
         <!-- Logo Section -->
         <div class="flex items-center space-x-4">
-            <img src="logo.png" alt="Food Dash Logo" class="h-10">
             <span class="text-2xl font-semibold text-green-600">Food Dash</span>
         </div>
 
@@ -44,6 +43,13 @@
 
             <!-- User Account -->
             <div class="flex items-center space-x-4">
+                <% if(session.getAttribute("role") != null && session.getAttribute("role").equals("admin")) { %>
+                <li>
+                    <form action="adminuser" method="post">
+                        <button type="submit" class="nav-btn dashboard-btn">Dashboard</button>
+                    </form>
+                </li>
+                <% } %>
                 <a href="login.jsp">
                     <button class="text-lg font-medium text-gray-700 hover:text-green-600">Login</button>
                 </a>
@@ -58,16 +64,16 @@
 
 <!-- Hero Section with Image Slider -->
 <section x-data="{
-    slideIndex: 0,
-    slides: [
-        '/webapp/assets/banner-restaurant1.jpg',
-        '/webapp/assets/banner-restaurant2.jpg',
-        '/webapp/assets/banner-restaurant3.jpg'
-    ],
-    autoSlide() {
-        setInterval(() => {
-            this.slideIndex = (this.slideIndex + 1) % this.slides.length;
-        }, 5000); // Change image every 5 seconds
+         slideIndex: 0,
+         slides: [
+         'assets/b2.jpeg',
+         'assets/B1.jpeg',
+         'assets/B3.jpeg'
+],
+autoSlide() {
+setInterval(() => {
+this.slideIndex = (this.slideIndex + 1) % this.slides.length;
+}, 5000); // Change image every 5 seconds
     }
 }" x-init="autoSlide()" class="relative">
     <div class="w-full h-96 overflow-hidden relative">
@@ -76,14 +82,7 @@
     </div>
 
     <!-- Overlay Text -->
-    <div class="absolute inset-0 bg-black opacity-40"></div>
-    <div class="absolute inset-0 flex items-center justify-start p-12 text-white">
-        <div>
-            <h2 class="text-4xl font-bold text-green-600">Taste the Best Food in Town!</h2>
-            <p class="mt-2 text-lg">Indulge in gourmet meals from your favorite restaurants, delivered fresh and healthy.</p>
-            <a href="#" class="mt-4 inline-block bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">Order Now</a>
-        </div>
-    </div>
+
 
     <!-- Arrow Navigation -->
     <div class="absolute inset-y-1/2 left-0 flex items-center">
@@ -113,7 +112,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
         <!-- Food Item 1 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Burger" alt="Burger" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/Burger.jpeg" alt="Burger" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
                 <h3 class="text-2xl font-semibold text-green-700">Classic Burger</h3>
                 <div class="flex items-center space-x-2 mt-2">
@@ -132,7 +131,7 @@
 
         <!-- Food Item 2 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Pizza" alt="Submarine" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/Beef Sub.jpeg" alt="Submarine" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
                 <h3 class="text-2xl font-semibold text-green-700">Beef Submarine</h3>
                 <div class="flex items-center space-x-2 mt-2">
@@ -151,7 +150,7 @@
 
         <!-- Food Item 3 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Fries" alt="Fries" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/French Fries.jpeg" alt="Fries" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
                 <h3 class="text-2xl font-semibold text-green-700">French Fries</h3>
                 <div class="flex items-center space-x-2 mt-2">
@@ -170,7 +169,7 @@
 
         <!-- Food Item 4 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Chicken+Wings" alt="Chicken Wings" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/Wings.jpeg" alt="Chicken Wings" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
                 <h3 class="text-2xl font-semibold text-green-700">Spicy Chicken Wings</h3>
                 <div class="flex items-center space-x-2 mt-2">
@@ -189,7 +188,7 @@
 
         <!-- Food Item 5 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Hotdog" alt="Hotdog" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/Hotdog.jpeg" alt="Hotdog" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
                 <h3 class="text-2xl font-semibold text-green-700">Classic Hotdog</h3>
                 <div class="flex items-center space-x-2 mt-2">
@@ -208,9 +207,9 @@
 
         <!-- Food Item 6 -->
         <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-            <img src="https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Sandwich" alt="Sandwich" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="assets/Shawarma.jpeg" alt="Shawarma" class="w-full h-48 object-cover rounded-t-lg">
             <div class="text-left mt-4">
-                <h3 class="text-2xl font-semibold text-green-700">Chicken Sandwich</h3>
+                <h3 class="text-2xl font-semibold text-green-700">Chicken Shawarma</h3>
                 <div class="flex items-center space-x-2 mt-2">
                     <i class="fas fa-star text-yellow-400"></i>
                     <i class="fas fa-star text-yellow-400"></i>

@@ -38,7 +38,7 @@ public class login extends HttpServlet {
 
         if (status) {
             customer loggedInCustomer = service.getOne(customer);
-
+            System.out.println(loggedInCustomer.getRole());
             HttpSession session = request.getSession();
             session.setAttribute("user", loggedInCustomer);
             session.setAttribute("role", loggedInCustomer.getRole());

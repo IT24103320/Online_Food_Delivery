@@ -72,7 +72,7 @@ public class UserService {
                         cust.setPassword(data[3]);
                         cust.setAddress(data[4]);
                         cust.setCity(data[5]);
-                        cust.setRole(data[4]);
+                        cust.setRole(data[6]);
                         return cust;
                     }
                 }
@@ -172,4 +172,37 @@ public class UserService {
             System.out.println("Could not rename temp file");
         }
     }
+    // Search users by name or email
+    public ArrayList<customer> searchUsers(String searchQuery) {
+        ArrayList<customer> matchedUsers = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length >= 5) {
+                    String name = data[0];
+                    String email = data[1];
+
+                    // Check if the search query matches the name or email
+                    if (name.toLowerCase().contains(searchQuery.toLowerCase()) ||
+                            email.toLowerCase().contains(searchQuery.toLowerCase())) {
+
+                        customer cust = new customer();
+                        cust.setName(name);
+                        cust.setEmail(email);
+                        cust.setPhone(data[2]);
+                        cust.setPassword(data[3]);
+                        cust.setRole(data[4]);
+                        matchedUsers.add(cust);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return matchedUsers;
+    }
 }
+

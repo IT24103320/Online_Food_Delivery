@@ -1,3 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%
+    String role = (String) session.getAttribute("role");
+    if (role == null || !role.equals("admin")) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,30 +52,22 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Example of user row, repeat for each user -->
+            <c:forEach var="cus" items="${allUser}" varStatus="status">
             <tr>
-                <td class="px-4 py-2 text-center">1</td>
-                <td class="px-4 py-2">John Doe</td>
-                <td class="px-4 py-2">john@example.com</td>
-                <td class="px-4 py-2">+94 0781234567</td>
+                <td class="px-4 py-2 text-center">${status.index + 1}</td>
+                <td class="px-4 py-2">${cus.name}</td>
+                <td class="px-4 py-2">${cus.email}</td>
+                <td class="px-4 py-2">${cus.phone}</td>
                 <td class="px-4 py-2 text-center">
-                    <button class="bg-red-500 text-white py-1 px-4 rounded-md hover:bg-red-600" onclick="deleteUser(1)">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
+                <form action="delete" method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                    <input type="hidden" name="email" value="${cus.email}" />
+                    <button class="action-btn delete" title="Delete User">
+                <i class="fas fa-trash-alt"></i>
+                </button>
+                </form>
                 </td>
             </tr>
-            <tr>
-                <td class="px-4 py-2 text-center">2</td>
-                <td class="px-4 py-2">Jane Smith</td>
-                <td class="px-4 py-2">jane@example.com</td>
-                <td class="px-4 py-2">+94 0787654321</td>
-                <td class="px-4 py-2 text-center">
-                    <button class="bg-red-500 text-white py-1 px-4 rounded-md hover:bg-red-600" onclick="deleteUser(2)">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
-                </td>
-            </tr>
-            <!-- Add more rows dynamically from your database -->
+            </c:forEach>
             </tbody>
         </table>
     </div>

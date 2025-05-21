@@ -1,6 +1,7 @@
 package com.project;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.customer;
 import service.UserService;
 
 @WebServlet("/delete")
@@ -19,19 +21,14 @@ public class delete extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve the email from the current session
-        HttpSession session = request.getSession();
-        String email = ((String) session.getAttribute("email")); // assuming the email is stored in session
 
-        if (email != null) {
+        if (request.getParameter("email") != null) {
             UserService service = new UserService();
-            service.deleteUserByEmail(email); // delete the user by email
+            service.deleteUserByEmail(request.getParameter("email"));
 
-            // Invalidate session after deletion
-            session.invalidate();
-
-            // Redirect to login page after deletion
-            response.sendRedirect("login.jsp");
+            ArrayList<customer> user = service.getAllUser();
+            request.setAttribute("allUser", user);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else {
             response.sendRedirect("profile.jsp"); // Redirect to profile if email not found in session
         }

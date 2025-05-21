@@ -9,7 +9,7 @@ public class customer {
     private String password;
     private String role;
 
-    // Constructor untuk set default role
+
     public customer() {
         this.role = "user";  // default role
     }
