@@ -39,10 +39,11 @@ public class  adminSearch extends HttpServlet {
         ArrayList<customer> matchedUsers = userService.searchUsers(searchQuery);
 
         // Set the search results to be available on the request scope
-        request.setAttribute("matchedUsers", matchedUsers);
+        request.setAttribute("allUser", matchedUsers);
+        request.setAttribute("searchQuery", searchQuery);
 
         // Forward to admin dashboard to display the results
-        RequestDispatcher dispatcher = request.getRequestDispatcher("adminDashboard.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
         dispatcher.forward(request, response);
     }
 }

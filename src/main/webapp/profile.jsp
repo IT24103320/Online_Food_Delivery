@@ -23,6 +23,11 @@
 <body class="bg-green-50 min-h-screen flex items-center justify-center py-12 px-4">
 
 <div class="bg-white shadow-lg rounded-lg max-w-4xl w-full p-8">
+    <div class="mb-6">
+        <a href="home.jsp" class="text-green-700 text-lg font-semibold flex items-center">
+            <i class="fas fa-home mr-2"></i> Home
+        </a>
+    </div>
     <h2 class="text-3xl font-semibold text-green-700 mb-6 text-center">Your Profile</h2>
 
     <form id="profileForm" method="post" action="update">

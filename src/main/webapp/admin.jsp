@@ -26,15 +26,25 @@
 
 <!-- Admin Dashboard Section -->
 <section class="max-w-screen-xl mx-auto py-16 px-6">
+    <div class="mb-6">
+        <a href="home.jsp" class="text-green-700 text-lg font-semibold flex items-center">
+            <i class="fas fa-home mr-2"></i> Home
+        </a>
+    </div>
     <h2 class="text-4xl font-semibold text-center text-green-700 mb-6">Admin Dashboard</h2>
     <p class="text-center text-lg text-gray-600 mb-12">Manage all users of Food Dash</p>
 
     <!-- Search Form -->
     <div class="flex justify-center mb-6">
-        <form action="searchUsers" method="get" class="flex space-x-4">
-            <input type="text" name="search" placeholder="Search by name or email" class="w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+        <form action="adminSearch" method="post" class="flex space-x-4">
+            <input type="text" name="search" value="${searchQuery}" placeholder="Search by name or email" class="w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
             <button type="submit" class="w-24 bg-green-700 text-white py-2 rounded-md hover:bg-green-600 flex items-center justify-center">
-                <i class="fas fa-search"></i> Search
+                <i class="fas fa-search mr-2"></i> Search
+            </button>
+        </form>
+        <form action="adminuser" method="post" class="flex space-x-4">
+            <button type="submit" class="w-24 bg-red-400 text-white py-2 ml-2 rounded-md hover:bg-red-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark mr-2"></i>Reset
             </button>
         </form>
     </div>

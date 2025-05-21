@@ -127,13 +127,24 @@ public class UserService {
                                 customer.getPassword() + "," +
                                 customer.getRole();
                         writer.write(updatedData);
+                        System.out.println("email found");
                     } else {
                         writer.write(line);
+                        System.out.println("email not found");
                     }
                     writer.newLine();
                 }
             }
-            System.out.println("Customer data updated to profile.");
+            if (inputFile.delete()) {
+                if (tempFile.renameTo(inputFile)) {
+                    System.out.println("Customer data updated successfully.");
+                } else {
+                    System.out.println("Failed to rename temp file to original.");
+                }
+            } else {
+                System.out.println("Failed to delete the original file.");
+            }
+
         } catch (IOException e) {
             System.out.println("Customer data not updated to profile.");
             e.printStackTrace();

@@ -1,3 +1,2 @@
-Shiham,shiham@gmail.com,102938454,2345,colombo,add,user
-Rifas A Azeez Aathif,aathifraa@gmail.com,0769211611,123,colombo -06,sssss,user
-Inzam,inzam@gmail.com,0758694738,inzam123,rahtnapurecity.n09,Rathna,admin
+Shiham,shiham@gmail.com,102938454,123,colombo,add,admin
+Inzam a,inzam@gmail.com,0758694738,123,user
