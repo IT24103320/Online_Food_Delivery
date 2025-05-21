@@ -57,66 +57,66 @@
                     
                     <h4 class="mb-3">Credit Card Information</h4>
                     
-                    <form action="${pageContext.request.contextPath}/payment" method="post" id="paymentForm">
+                    <form action="${pageContext.request.contextPath}/payment/process" method="post" id="paymentForm">
                         <input type="hidden" name="action" value="process">
-                        
+
                         <div class="credit-card-box mb-4">
                             <div class="mb-3">
                                 <label for="cardholderName" class="form-label">Cardholder Name</label>
                                 <input type="text" class="form-control" id="cardholderName" name="cardholderName" required>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="cardNumber" class="form-label">Card Number</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" 
+                                    <input type="text" class="form-control" id="cardNumber" name="cardNumber"
                                            placeholder="1234 5678 9012 3456" required maxlength="19">
                                     <span class="input-group-text">
                                         <i class="bi bi-credit-card"></i>
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="expiryDate" class="form-label">Expiry Date</label>
-                                    <input type="text" class="form-control" id="expiryDate" name="expiryDate" 
+                                    <input type="text" class="form-control" id="expiryDate" name="expiryDate"
                                            placeholder="MM/YY" required maxlength="5">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" 
+                                    <input type="text" class="form-control" id="cvv" name="cvv"
                                            placeholder="123" required maxlength="4">
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex justify-content-between mt-4">
-                            <button type="button" class="btn btn-outline-secondary" 
+                            <button type="button" class="btn btn-outline-secondary"
                                     onclick="window.location.href='${pageContext.request.contextPath}/payment?action=cancel'">
                                 <i class="bi bi-arrow-left"></i> Back to Checkout
                             </button>
-                            
+
                             <button type="submit" class="btn btn-primary">
                                 Pay $${order.totalAmount} <i class="bi bi-lock"></i>
                             </button>
                         </div>
                     </form>
                 </div>
-                
+
                 <div class="alert alert-info">
                     <h5><i class="bi bi-info-circle"></i> Demo Mode</h5>
                     <p class="mb-0">This is a demo application. No actual payment will be processed. You can use any valid-format credit card information.</p>
                     <p class="mb-0 mt-2"><strong>Test Card:</strong> 4111 1111 1111 1111, Exp: any future date (MM/YY), CVV: any 3 digits</p>
                 </div>
             </div>
-            
+
             <!-- Order Summary -->
             <div class="col-lg-4">
                 <div class="order-summary">
                     <h4 class="mb-3">Order Summary</h4>
                     <p class="text-muted mb-4">From: ${order.restaurantName}</p>
-                    
+
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
                         <span>$${order.subtotal}</span>
@@ -140,14 +140,14 @@
                         <span>Total</span>
                         <span>$${order.totalAmount}</span>
                     </div>
-                    
+
                     <div class="mt-4">
                         <h6>Delivery Information</h6>
                         <p class="mb-1">${order.customerName}</p>
                         <p class="mb-1">${order.customerPhone}</p>
                         <p class="mb-0">${order.deliveryAddress}</p>
                     </div>
-                    
+
                     <div class="mt-4">
                         <h6>Estimated Delivery Time</h6>
                         <p class="text-muted">30-45 minutes after payment confirmation</p>
@@ -156,24 +156,24 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Credit card number formatting
         document.getElementById('cardNumber').addEventListener('input', function (e) {
             let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
             let formattedValue = '';
-            
+
             for (let i = 0; i < value.length; i++) {
                 if (i > 0 && i % 4 === 0) {
                     formattedValue += ' ';
                 }
                 formattedValue += value[i];
             }
-            
+
             e.target.value = formattedValue;
         });
-        
+
         // Expiry date formatting
         document.getElementById('expiryDate').addEventListener('input', function (e) {
             let value = e.target.value.replace(/\D/g, '');
@@ -183,7 +183,7 @@
                 e.target.value = value;
             }
         });
-        
+
         // CVV validation - numbers only
         document.getElementById('cvv').addEventListener('input', function (e) {
             e.target.value = e.target.value.replace(/\D/g, '');
