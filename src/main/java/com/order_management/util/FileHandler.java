@@ -4,19 +4,18 @@ import com.order_management.model.Order;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class FileHandler {
 
     private static String filePath;
-    private static LinkedList<Order> orderQueue = new LinkedList<>();
+    private static OrderQueue orderQueue = new OrderQueue();
 
     // Setter to configure the file path, call this once from servlet init()
     public static void setFilePath(String path) {
         filePath = path;
         // Initialize queue by loading existing orders from file
-        orderQueue = new LinkedList<>(readOrders());
+        orderQueue.initialize(readOrders());
     }
 
     private static String getFilePath() {
@@ -61,7 +60,7 @@ public class FileHandler {
     }
 
     public static void addOrder(Order order) {
-        orderQueue.add(order); // Add to queue
+        orderQueue.enqueue(order); // Add to queue
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFilePath(), true))) {
             writer.write(order.toDataString());
             writer.newLine();
@@ -71,33 +70,37 @@ public class FileHandler {
     }
 
     public static void deleteOrder(String orderId) {
-        orderQueue.removeIf(order -> order.getOrderId().equals(orderId)); // Remove from queue
-        List<Order> orders = new ArrayList<>(orderQueue);
+        orderQueue.remove(orderId); // Remove from queue
+        List<Order> orders = orderQueue.getAllOrders();
         writeOrders(orders);
     }
 
     public static void updateOrder(Order updatedOrder) {
-        // Update queue
-        for (int i = 0; i < orderQueue.size(); i++) {
-            if (orderQueue.get(i).getOrderId().equals(updatedOrder.getOrderId())) {
-                orderQueue.set(i, updatedOrder);
-                break;
-            }
-        }
-        // Update file
-        writeOrders(new ArrayList<>(orderQueue));
+        orderQueue.update(updatedOrder); // Update in queue
+        List<Order> orders = orderQueue.getAllOrders();
+        writeOrders(orders);
     }
 
     public static Order getOrderById(String orderId) {
-        for (Order order : orderQueue) {
-            if (order.getOrderId().equals(orderId)) {
-                return order;
-            }
-        }
-        return null;
+        return orderQueue.getOrderById(orderId);
     }
 
     public static List<Order> getAllOrders() {
-        return new ArrayList<>(orderQueue);
+        return orderQueue.getAllOrders();
+    }
+
+    // Get the next order for delivery without removing it
+    public static Order getNextOrder() {
+        return orderQueue.peek();
+    }
+
+    // Remove and return the next order for delivery
+    public static Order processNextOrder() {
+        Order nextOrder = orderQueue.dequeue();
+        if (nextOrder != null) {
+            // Update file by rewriting all remaining orders
+            writeOrders(orderQueue.getAllOrders());
+        }
+        return nextOrder;
     }
 }
